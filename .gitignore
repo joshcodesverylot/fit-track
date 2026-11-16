@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dev-dist/
+*.local
+
+# keep the private project plan out of the public repo
+*.pdf
+*.canvas

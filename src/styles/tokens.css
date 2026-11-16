@@ -1,0 +1,155 @@
+/* Design tokens from the project plan. The text-size setting scales
+   everything through --scale on <html>. */
+:root {
+  /* Golden & white theme */
+  --bg: #fdfbf4;
+  --surface: #ffffff;
+  --border: #e6dcc3;
+  --ink: #221c0e;
+  --ink-muted: #5a523d;
+  --accent: #8e6508;
+  --accent-dark: #6e4e05;
+  --accent-soft: #f8f0da;
+  --track: #efe9d7;
+  --tick-empty: #a79c7e;
+  --gold: #d4a017;
+  --gold-soft: #fbf3dd;
+  --tux: #23242a;
+  --warn-bg: #fff1dc;
+  --warn-border: #c77a1a;
+  --danger: #a33a2e;
+  --danger-soft: #fbe9e6;
+  --water: #2b6cb0;
+  --water-soft: #e3eefb;
+
+  /* Text scale: 1 = normal. Set from the text-size setting. */
+  --scale: 1;
+
+  --fs-label: calc(16px * var(--scale));
+  --fs-body: calc(19px * var(--scale));
+  --fs-card: calc(22px * var(--scale));
+  --fs-title: calc(34px * var(--scale));
+  --fs-big: calc(28px * var(--scale));
+
+  --radius-btn: 14px;
+  --radius-card: 20px;
+  --pad-side: 24px;
+  --gap: 13px;
+
+  --tap: 60px;       /* standard button height */
+  --tick: 58px;      /* tick circle size */
+  --tab-h: 64px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+h1 {
+  font-size: var(--fs-title);
+  line-height: 1.15;
+  margin: 0;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--fs-big);
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 700;
+}
+
+button {
+  font-family: inherit;
+  font-size: var(--fs-body);
+  color: var(--ink);
+  border: 2px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-btn);
+  min-height: var(--tap);
+  padding: 10px 18px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: var(--fs-body);
+  color: var(--ink);
+  border: 2px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-btn);
+  min-height: 56px;
+  padding: 10px 14px;
+  width: 100%;
+}
+
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.btn-primary:active {
+  background: var(--accent-dark);
+}
+
+.btn-quiet {
+  background: transparent;
+  border-color: transparent;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 16px;
+}
+
+.muted {
+  color: var(--ink-muted);
+  font-size: var(--fs-label);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
