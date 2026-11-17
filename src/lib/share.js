@@ -35,7 +35,7 @@ function esc(s) {
 
 function tickLine(y, text) {
   return `
-    <circle cx="150" cy="${y - 13}" r="21" fill="#d4a017" />
+    <circle cx="150" cy="${y - 13}" r="21" fill="#edab09" />
     <path d="M140 ${y - 13} l7 8 l15 -16" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
     <text x="192" y="${y}" font-size="38" fill="#221c0e">${esc(text)}</text>`;
 }
@@ -66,14 +66,14 @@ export function buildCardSvg(settings, d) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
   <rect width="1080" height="1080" fill="#fdfbf4" />
-  <rect x="24" y="24" width="1032" height="1032" rx="48" fill="none" stroke="#d4a017" stroke-width="10" />
-  <text x="540" y="104" text-anchor="middle" font-size="46" font-weight="700" fill="#8e6508" font-family="Segoe UI, Arial, sans-serif">Fit Track</text>
+  <rect x="24" y="24" width="1032" height="1032" rx="48" fill="none" stroke="#edab09" stroke-width="10" />
+  <text x="540" y="104" text-anchor="middle" font-size="46" font-weight="700" fill="#976a06" font-family="Segoe UI, Arial, sans-serif">Fit Track</text>
   <g transform="translate(392, 128) scale(1.48)" font-family="Segoe UI, Arial, sans-serif">${tuxInner(settings.equippedAccessory || 'bowtie', 'happy')}</g>
   <g font-family="Segoe UI, Arial, sans-serif">
     <text x="540" y="516" text-anchor="middle" font-size="62" font-weight="700" fill="#221c0e">${esc(title)}</text>
     <text x="540" y="566" text-anchor="middle" font-size="38" fill="#5a523d">${esc(friendlyDate())}</text>
     ${lineSvg}
-    <rect x="300" y="${pointsY - 44}" width="480" height="72" rx="36" fill="#d4a017" />
+    <rect x="300" y="${pointsY - 44}" width="480" height="72" rx="36" fill="#edab09" />
     <text x="540" y="${pointsY + 4}" text-anchor="middle" font-size="38" font-weight="700" fill="#fff">+${d.points} Paw Points today</text>
     <text x="540" y="1038" text-anchor="middle" font-size="26" fill="#5a523d">Tux is proud. Shared from Fit Track.</text>
   </g>

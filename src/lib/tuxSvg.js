@@ -8,8 +8,8 @@
 // can draw it mid-air instead.
 const FUR = '#23242a';
 const INK = '#221c0e';
-const GOLD = '#d4a017';
-const GOLD_DARK = '#8e6508';
+const GOLD = '#edab09';
+const GOLD_DARK = '#976a06';
 
 export function tuxInner(accessory = 'bowtie', mood = 'normal', opts = {}) {
   const openEyes = `

@@ -71,11 +71,21 @@
     </p>
 
     <div class="figure-wrap">
-      <ExerciseFigure figure={exercise.figure} paused={figurePaused} />
-      {#if !reduceMotion}
-        <button class="pause" on:click={() => (figurePaused = !figurePaused)}>
-          {figurePaused ? 'Play' : 'Pause'}
-        </button>
+      {#if exercise.media}
+        <img
+          class="media-img"
+          src={exercise.media}
+          alt={`How to do ${exercise.name}`}
+          on:error={(e) => (e.currentTarget.style.display = 'none')}
+        />
+        <span class="attribution">© Gym visual — gymvisual.com</span>
+      {:else}
+        <ExerciseFigure figure={exercise.figure} paused={figurePaused} />
+        {#if !reduceMotion}
+          <button class="pause" on:click={() => (figurePaused = !figurePaused)}>
+            {figurePaused ? 'Play' : 'Pause'}
+          </button>
+        {/if}
       {/if}
     </div>
 
@@ -173,6 +183,24 @@
     height: 240px;
     padding: 12px;
     margin-bottom: 14px;
+  }
+
+  .media-img {
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: 6px auto 0;
+    border-radius: 14px;
+    object-fit: contain;
+    background: #fff;
+  }
+
+  .attribution {
+    position: absolute;
+    bottom: 6px;
+    right: 12px;
+    font-size: calc(12px * var(--scale));
+    color: var(--ink-muted);
   }
 
   .pause {

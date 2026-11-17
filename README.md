@@ -27,10 +27,16 @@ Safari and Home Screen apps have separate storage.
 - **Today** — tick off today's planned meals, quick-add unplanned food,
   see the routine's progress ring, optional water glasses, gentle
   celebration when the whole day is done.
-- **Exercise** — tick each move or "I did it all". Every exercise has a
-  full-screen how-to page (via **Show me** or press-and-hold) with an
-  animated illustration, 3 numbered steps, a "Stay safe" note, an easier
-  version and **Read it to me** (offline speech synthesis).
+- **Exercise** — a Hevy-style routines home: Quick start, routine cards
+  with Start buttons, and a routine player with thumbnail rows. Tick each
+  move or "I did it all". Every exercise has a full-screen how-to page
+  (tap the row, or press-and-hold) with an illustration or photo, numbered
+  steps, a "Stay safe" note and **Read it to me** (offline speech
+  synthesis). **Add exercise** opens a searchable library of 1,324
+  exercises (search + body-part filters) built from the
+  [exercises-dataset](https://github.com/hasaneyldrm/exercises-dataset)
+  (data MIT; exercise images © Gym visual — gymvisual.com, hotlinked at
+  180×180 with attribution per the dataset's media terms).
 - **Food** — the week plan, Mon–Sun. Presets are read-only; **Copy & edit**
   clones one into "my plan" where meals can be added/removed per day.
 - **Progress** — bars per day for meals, tick dots for exercise days,

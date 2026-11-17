@@ -7,6 +7,8 @@
   import Today from './screens/Today.svelte';
   import AddPlan from './screens/AddPlan.svelte';
   import Routine from './screens/Routine.svelte';
+  import Player from './screens/Player.svelte';
+  import ExercisePicker from './screens/ExercisePicker.svelte';
   import WeekPlan from './screens/WeekPlan.svelte';
   import Progress from './screens/Progress.svelte';
   import QuickAddFood from './screens/QuickAddFood.svelte';
@@ -39,6 +41,10 @@
       <AddPlan />
     {:else if $route.name === 'routine'}
       <Routine />
+    {:else if $route.name === 'player'}
+      <Player />
+    {:else if $route.name === 'expicker'}
+      <ExercisePicker />
     {:else if $route.name === 'food'}
       <WeekPlan />
     {:else if $route.name === 'progress'}

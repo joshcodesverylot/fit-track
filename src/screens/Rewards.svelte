@@ -48,20 +48,23 @@
     pawX = rest.x; pawY = rest.y; pawR = 0; pawT = 0;
     await sleep(40);
 
-    // raise the paw to his mouth
-    pawT = 320;
-    pawR = side === 'left' ? -14 : 14;
-    pawX = side === 'left' ? 90 : 110;
-    pawY = 130;
-    await sleep(350);
+    // Sometimes he licks the paw first, sometimes he gets straight to it.
+    if (Math.random() < 0.5) {
+      // raise the paw to his mouth
+      pawT = 320;
+      pawR = side === 'left' ? -14 : 14;
+      pawX = side === 'left' ? 90 : 110;
+      pawY = 130;
+      await sleep(350);
 
-    // lick it (little bobs against the tongue)
-    tongue = true;
-    for (let i = 0; i < 3; i++) {
-      pawT = 120; pawY = 123; await sleep(135);
-      pawY = 132; await sleep(135);
+      // lick it (little bobs against the tongue)
+      tongue = true;
+      for (let i = 0; i < 3; i++) {
+        pawT = 120; pawY = 123; await sleep(135);
+        pawY = 132; await sleep(135);
+      }
+      tongue = false;
     }
-    tongue = false;
 
     // wipe the spot that was touched
     pawT = 340; pawR = 0; pawX = tx; pawY = ty;
@@ -139,9 +142,9 @@
         {/if}
         {#if sparkle}
           <g transform={`translate(${sparkle.x} ${sparkle.y})`}>
-            <path class="sp" d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill="#d4a017" />
-            <path class="sp" transform="translate(14 -10) scale(0.5)" d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill="#d4a017" />
-            <path class="sp" transform="translate(-13 8) scale(0.45)" d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill="#d4a017" />
+            <path class="sp" d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill="#edab09" />
+            <path class="sp" transform="translate(14 -10) scale(0.5)" d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill="#edab09" />
+            <path class="sp" transform="translate(-13 8) scale(0.45)" d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill="#edab09" />
           </g>
         {/if}
         {#if poking}

@@ -266,7 +266,7 @@
   {#if routine}
     <section>
       <h2>Exercise</h2>
-      <button class="card routine-card" on:click={() => go('routine')}>
+      <button class="card routine-card" on:click={() => go('player')}>
         <div class="meal-text">
           <span class="meal-name">{routine.name}</span>
           <span class="muted">
