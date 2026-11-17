@@ -1,27 +1,57 @@
 // Tux's artwork as a plain SVG string (viewBox 0 0 200 230), shared by the
 // TuxCat component and the canvas-rendered share card. Colors are fixed so
 // the markup rasterizes identically outside the app's stylesheet.
+//
+// Moods: 'normal' (neutral), 'pleased' (soft smile), 'happy' (closed ^^
+// eyes, big smile), 'sassy' (half-lidded eyes, raised brow, smirk).
+// opts.hidePaw ('left'|'right') omits a front paw so an animation layer
+// can draw it mid-air instead.
 const FUR = '#23242a';
 const INK = '#221c0e';
 const GOLD = '#d4a017';
 const GOLD_DARK = '#8e6508';
 
-export function tuxInner(accessory = 'bowtie', mood = 'normal') {
-  const eyes =
-    mood === 'happy'
-      ? `<path d="M66 92 Q76 82 86 92" fill="none" stroke="${INK}" stroke-width="4.5" stroke-linecap="round" />
-         <path d="M114 92 Q124 82 134 92" fill="none" stroke="${INK}" stroke-width="4.5" stroke-linecap="round" />`
-      : `<ellipse cx="76" cy="92" rx="10.5" ry="12" fill="#b5c98a" />
-         <ellipse cx="124" cy="92" rx="10.5" ry="12" fill="#b5c98a" />
-         <ellipse cx="76" cy="93" rx="5" ry="7" fill="${INK}" />
-         <ellipse cx="124" cy="93" rx="5" ry="7" fill="${INK}" />
-         <circle cx="78.5" cy="88" r="2.2" fill="#fff" />
-         <circle cx="126.5" cy="88" r="2.2" fill="#fff" />`;
+export function tuxInner(accessory = 'bowtie', mood = 'normal', opts = {}) {
+  const openEyes = `
+    <ellipse cx="76" cy="92" rx="10.5" ry="12" fill="#b5c98a" />
+    <ellipse cx="124" cy="92" rx="10.5" ry="12" fill="#b5c98a" />
+    <ellipse cx="76" cy="93" rx="5" ry="7" fill="${INK}" />
+    <ellipse cx="124" cy="93" rx="5" ry="7" fill="${INK}" />
+    <circle cx="78.5" cy="88" r="2.2" fill="#fff" />
+    <circle cx="126.5" cy="88" r="2.2" fill="#fff" />`;
 
-  const smile =
+  let eyes = '';
+  let extras = '';
+  if (mood === 'happy') {
+    eyes = `
+    <path d="M66 92 Q76 82 86 92" fill="none" stroke="${INK}" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M114 92 Q124 82 134 92" fill="none" stroke="${INK}" stroke-width="4.5" stroke-linecap="round" />`;
+    extras = `<path d="M88 126 Q100 134 112 126" fill="none" stroke="${INK}" stroke-width="2.6" stroke-linecap="round" />`;
+  } else if (mood === 'sassy') {
+    // half-lidded eyes, one raised brow, smirk
+    eyes = `
+    ${openEyes}
+    <rect x="64.5" y="79" width="23" height="11.5" fill="${FUR}" />
+    <rect x="112.5" y="79" width="23" height="11.5" fill="${FUR}" />
+    <path d="M66 90.5 H86" stroke="${INK}" stroke-width="2.4" stroke-linecap="round" />
+    <path d="M114 90.5 H134" stroke="${INK}" stroke-width="2.4" stroke-linecap="round" />
+    <path d="M112 71 Q124 64 136 70" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round" />`;
+    extras = `<path d="M89 124 Q99 130 112 121" fill="none" stroke="${INK}" stroke-width="2.6" stroke-linecap="round" />`;
+  } else {
+    eyes = openEyes;
+    if (mood === 'pleased') {
+      extras = `<path d="M90 125 Q100 131 110 125" fill="none" stroke="${INK}" stroke-width="2.6" stroke-linecap="round" />`;
+    }
+  }
+
+  // blink lids (fur-colored, invisible until CSS animates them)
+  const lids =
     mood === 'happy'
-      ? `<path d="M88 126 Q100 134 112 126" fill="none" stroke="${INK}" stroke-width="2.6" stroke-linecap="round" />`
-      : '';
+      ? ''
+      : `<g class="lids" opacity="0">
+           <ellipse cx="76" cy="92" rx="11.5" ry="13" fill="${FUR}" />
+           <ellipse cx="124" cy="92" rx="11.5" ry="13" fill="${FUR}" />
+         </g>`;
 
   const neck =
     accessory === 'scarf'
@@ -51,6 +81,21 @@ export function tuxInner(accessory = 'bowtie', mood = 'normal') {
             <path d="M124 108 C128 130 140 140 148 150" fill="none" stroke="${GOLD}" stroke-width="2.5" stroke-dasharray="1 6" stroke-linecap="round" />`;
   }
 
+  const leftPaw =
+    opts.hidePaw === 'left'
+      ? ''
+      : `<ellipse cx="84" cy="219" rx="15" ry="9" fill="#fff" />
+         <g stroke="#d8d2c2" stroke-width="2" stroke-linecap="round">
+           <path d="M80 214 L80 222" /><path d="M88 214 L88 222" />
+         </g>`;
+  const rightPaw =
+    opts.hidePaw === 'right'
+      ? ''
+      : `<ellipse cx="116" cy="219" rx="15" ry="9" fill="#fff" />
+         <g stroke="#d8d2c2" stroke-width="2" stroke-linecap="round">
+           <path d="M112 214 L112 222" /><path d="M120 214 L120 222" />
+         </g>`;
+
   return `
   <path d="M152 212 C188 206 194 172 176 156" fill="none" stroke="${FUR}" stroke-width="15" stroke-linecap="round" />
   <path d="M179 168 C184 164 186 160 176 156" fill="none" stroke="#fff" stroke-width="15" stroke-linecap="round" opacity="0.95" />
@@ -64,19 +109,16 @@ export function tuxInner(accessory = 'bowtie', mood = 'normal') {
   <path d="M100 56 C95 70 91 80 89 94 L111 94 C109 80 105 70 100 56 Z" fill="#fff" />
   <ellipse cx="100" cy="116" rx="31" ry="23" fill="#fff" />
   ${eyes}
+  ${lids}
   <path d="M93.5 109 L106.5 109 L100 117 Z" fill="#e8899a" />
   <path d="M100 117 Q100 122 100 122 M100 122 Q93 128 87 123 M100 122 Q107 128 113 123" fill="none" stroke="${INK}" stroke-width="2.6" stroke-linecap="round" />
-  ${smile}
+  ${extras}
   <g stroke="#c9c2b0" stroke-width="2" stroke-linecap="round">
     <path d="M66 110 L38 104" /><path d="M67 118 L39 118" /><path d="M68 126 L42 132" />
     <path d="M134 110 L162 104" /><path d="M133 118 L161 118" /><path d="M132 126 L158 132" />
   </g>
-  <ellipse cx="84" cy="219" rx="15" ry="9" fill="#fff" />
-  <ellipse cx="116" cy="219" rx="15" ry="9" fill="#fff" />
-  <g stroke="#d8d2c2" stroke-width="2" stroke-linecap="round">
-    <path d="M80 214 L80 222" /><path d="M88 214 L88 222" />
-    <path d="M112 214 L112 222" /><path d="M120 214 L120 222" />
-  </g>
+  ${leftPaw}
+  ${rightPaw}
   ${neck}
   ${head}`;
 }

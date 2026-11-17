@@ -45,6 +45,11 @@ Safari and Home Screen apps have separate storage.
 - **Tux** is the mascot: a cartoon tuxedo cat (SVG, `src/components/TuxCat.svelte`)
   modelled on the owner's cat. He appears in onboarding, the Today header,
   the day-complete celebration and his own screen, **Tux's corner**.
+- **Tux is alive**: he blinks, and his mood follows the day's progress —
+  neutral to start, a soft smile at half done, beaming when everything is
+  ticked. Pat him in Tux's corner and he gets sassy, licks whichever paw
+  is nearer to where you touched, wipes that exact spot clean, and
+  finishes with a little sparkle.
 - **Paw Points**: ticking meals (+5), exercises (+10), quick-added food (+3)
   and water (+1) earns points, with a +15 bonus on days with both a meal and
   an exercise. Points are *derived from the logs*, so Undo takes them back

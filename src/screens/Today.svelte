@@ -21,6 +21,7 @@
   import HoldCard from '../components/HoldCard.svelte';
   import TuxCat from '../components/TuxCat.svelte';
   import { computeBalance } from '../lib/points.js';
+  import { moodForProgress } from '../lib/mood.js';
 
   let slots = []; // [{ slot, slotName, meals: [{ meal, detail, ticked }] }]
   let pawBalance = 0;
@@ -28,6 +29,7 @@
   let todayWeight = null;
   let lastWeight = null; // { kg, date } from an earlier day
   let weightInput = '';
+  let chipMood = 'normal';
   let quickEntries = [];
   let waterCount = 0;
   let routine = null;
@@ -111,6 +113,14 @@
     }
 
     pawBalance = (await computeBalance(s)).balance;
+
+    // Tux's mood follows how much of the day is ticked off
+    const plannedCount =
+      slots.reduce((a, g) => a + g.meals.length, 0) + routineTotal;
+    const doneCount =
+      slots.reduce((a, g) => a + g.meals.filter((m) => m.ticked).length, 0) + routineDone;
+    chipMood = moodForProgress(plannedCount ? doneCount / plannedCount : 0);
+
     loaded = true;
   }
 
@@ -150,7 +160,7 @@
 
 {#if loaded}
   <button class="paw-chip" on:click={() => go('rewards')}>
-    <span class="chip-cat"><TuxCat accessory={$settings.equippedAccessory || 'bowtie'} /></span>
+    <span class="chip-cat"><TuxCat accessory={$settings.equippedAccessory || 'bowtie'} mood={chipMood} /></span>
     <span class="chip-text"><strong>{pawBalance}</strong> Paw Points</span>
     <span class="chip-go">Visit Tux ›</span>
   </button>
